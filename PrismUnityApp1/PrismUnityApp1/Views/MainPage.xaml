@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"         
+             xmlns:behaviors="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors"     
+             xmlns:c="clr-namespace:PrismUnityApp1"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="PrismUnityApp1.Views.MainPage"
+             Title="Reminder Tasks"  >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <c:ItemTappedEventArgsConverter x:Key="ItemTappedConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Add" Command="{Binding Path=AddCommand}"/>
+    </ContentPage.ToolbarItems>-->
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="listview" ItemsSource="{Binding Path=ListOfReminderItem, Mode=TwoWay}">
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ListItemTappedCommand}" EventArgsConverter="{StaticResource ItemTappedConverter}"/>
+                </ListView.Behaviors>
+                <!--<behaviors:Interaction.Behaviors>
+                    <behaviors:BehaviorCollection>
+                        <behaviors:EventToCommand EventName="ItemTapped" Command="{Binding ListItemTappedCommand}"/>
+                    </behaviors:BehaviorCollection>
+                </behaviors:Interaction.Behaviors>-->                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Path=Task}" Detail="{Binding  Path=dateTime}" >
+                        </TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout VerticalOptions="End" HorizontalOptions="End" Margin="0,0,0,12">
+                <controls:CircleImage Source="add_blue.png" Aspect="AspectFill" >
+                    <controls:CircleImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TappedCommand}">
+                        </TapGestureRecognizer>
+                    </controls:CircleImage.GestureRecognizers>
+                    <controls:CircleImage.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double"
+                iOS="55"
+                Android="70"
+                WinPhone="75"/>
+                    </controls:CircleImage.WidthRequest>
+                    <controls:CircleImage.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double"
+                iOS="55"
+                Android="55"
+                WinPhone="75"/>
+                    </controls:CircleImage.HeightRequest>
+                </controls:CircleImage>
+            </StackLayout>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

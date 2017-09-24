@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="PrismUnityApp1.Views.AddNewReminder"
+             Title="Add Reminder">
+
+    <StackLayout VerticalOptions="Start" Orientation="Vertical">
+        <Entry  x:Name="entryCell" Text="{Binding Path=Message}"/>
+        <DatePicker x:Name="datePicker" Date="{Binding Path=DateSelected}"></DatePicker>
+        <TimePicker x:Name="timePicker" Time="{Binding Path=TimeSelected}"></TimePicker>
+        <Button x:Name="button1" Text="Add Task" Command="{Binding Path=AddTaskCommand}"></Button>
+    </StackLayout>
+</ContentPage>
